@@ -1,9 +1,9 @@
 import { Router } from "express";
 import { listEpisodes, latestEpisodes, getEpisode } from "../controllers/episodes.controller";
 
-const r = Router();
-r.get("/", listEpisodes);
-r.get("/latest", latestEpisodes);
-r.get("/:id", getEpisode);
+const router = Router();
+router.get("/", listEpisodes);
+router.get("/latest", latestEpisodes);
+router.get("/:id", getEpisode);
 
-export default r;
+export default router;

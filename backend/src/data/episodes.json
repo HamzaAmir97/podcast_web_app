@@ -1,0 +1,32 @@
+[
+  {
+    "id": "como-codar-tranquilo",
+    "title": "Como codar tranquilo",
+    "description": "We talk about focus and healthy habits for developers. Short, practical tips.",
+    "thumbnail": "/static/images/como-codar-tranquilo.jpg",
+    "audioUrl": "/stream/como-codar-tranquilo",
+    "durationSeconds": 1518,
+    "publishedAt": "2024-07-08T09:00:00.000Z",
+    "authors": ["Tiago e Marla"]
+  },
+  {
+    "id": "como-comecar-na-programacao-2021",
+    "title": "Como começar na programação em 2021 do jeito certo",
+    "description": "A simple roadmap for beginners: mindset, resources, and common pitfalls.",
+    "thumbnail": "/static/images/como-comecar.jpg",
+    "audioUrl": "/stream/como-comecar-na-programacao-2021",
+    "durationSeconds": 1940,
+    "publishedAt": "2024-06-21T09:00:00.000Z",
+    "authors": ["Diego e Richard"]
+  },
+  {
+    "id": "introducao-ao-podcastr",
+    "title": "Introdução ao Podcastr",
+    "description": "What this podcast is about and what to expect in future episodes.",
+    "thumbnail": "/static/images/introducao.jpg",
+    "audioUrl": "/stream/introducao-ao-podcastr",
+    "durationSeconds": 600,
+    "publishedAt": "2024-05-01T10:00:00.000Z",
+    "authors": ["Team Podcastr"]
+  }
+]

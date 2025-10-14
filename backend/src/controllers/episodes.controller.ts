@@ -1,8 +1,18 @@
 import { Request, Response, NextFunction } from "express";
 import { Episodes } from "../services/episodes.service";
 
+
+
+
+
+
+
+
 // INFO: Lists episodes with optional text search and simple pagination.
 // NOTE: Query params → ?limit (default 10), ?offset (default 0), ?q (optional).
+
+
+
 export const listEpisodes = (req: Request, res: Response, next: NextFunction) => {
   try {
     // INFO: Extract query params with safe defaults.
@@ -27,8 +37,13 @@ export const listEpisodes = (req: Request, res: Response, next: NextFunction) =>
   }
 };
 
+
+
 // INFO: Returns the latest episodes ordered by published date (desc).
 // NOTE: Query param → ?limit (default 2).
+
+
+
 export const latestEpisodes = (req: Request, res: Response, next: NextFunction) => {
   try {
     // INFO: Parse and validate the limit.
@@ -48,8 +63,15 @@ export const latestEpisodes = (req: Request, res: Response, next: NextFunction) 
   }
 };
 
+
+
+
+
 // INFO: Fetch a single episode by its id (slug).
 // NOTE: Route param → /episodes/:id
+
+
+
 export const getEpisode = (req: Request, res: Response, next: NextFunction) => {
   try {
     // INFO: Read the id from the path parameters.
