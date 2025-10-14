@@ -19,10 +19,9 @@ export const createApp = () => {
   app.use(morgan("dev"));
   app.use(express.json());
 
-  // ملفات ثابتة: صور/ثَمبنيلز
   app.use("/static", express.static(path.join(__dirname, "..", "public")));
 
-  // ريت ليمت للبث
+
   
   app.use("/stream", rateLimit({ windowMs: 60_000, max: 60 }));
 
