@@ -59,7 +59,7 @@ podcast para ouvir</p>
        <input type="range"
        min={0}
        max={100}
-       className='w-[174px] h-[4px] [accent-color:#13c2a3]'
+       className='w-[174px] h-[4px]  bg-[#9F75FF] [accent-color:#13c2a3]'
        />
        <label>00:00</label>
      </div>

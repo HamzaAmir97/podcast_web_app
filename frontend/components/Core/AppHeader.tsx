@@ -3,13 +3,16 @@ import Image from 'next/image'
 
 const AppHeader = () => {
   return (
-    <div className='fixed left-0  '>
+    <div className='sticky top-0 z-50 '>
     <div
     className='flex 
     items-center justify-between 
-    w-[1120px]
+    w-[1097px]
     h-[104px]
-    p-4 bg-[#FFFFFF] '
+    p-4 bg-[#FFFFFF]
+    border-b-[1px] border-[#E6E8EB]
+    
+    '
     >   
 
 
