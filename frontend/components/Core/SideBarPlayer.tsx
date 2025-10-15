@@ -55,13 +55,13 @@ podcast para ouvir</p>
      <div className='absolute top-[550px] left-[80px]
      flex justify-center items-center gap-3
      '>
-       <label>00:00</label>
+       <label className='text-white'>00:00</label>
        <input type="range"
        min={0}
        max={100}
        className='w-[174px] h-[4px]  bg-[#9F75FF] [accent-color:#13c2a3]'
        />
-       <label>00:00</label>
+       <label className='text-white'>00:00</label>
      </div>
 
     {/* podcast player controls */}

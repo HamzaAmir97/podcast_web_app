@@ -1,9 +1,10 @@
 import Image from "next/image";
+import Link from "next/link";
 import React from "react";
 
 const page = ({ params }: { params: { id: string } }) => {
   return (
-    <div className="w-full h-screen flex  flex-col gap-5 justify-center items-center p-10 ">
+    <div className="w-full h-screen flex  flex-col gap-2  items-center  p-8  ">
       {/* podcast header */}
       <div className="relative">
         <Image
@@ -29,18 +30,21 @@ const page = ({ params }: { params: { id: string } }) => {
 
         
         {/* back button */}
+        <Link href="/">
         <div className='w-[40px] h-[40px] rounded-[10px]  cursor-pointer bg-primary
         absolute top-[40%] -left-[15px] 
         flex items-center justify-center
         '>
              <Image
-            src="/icons/play_arrow.png"
+            src="/icons/back.svg"
             alt="Logo"
-            width={24}
-            height={24}
+            width={6.67}
+            height={13.33}
+            className=" "
             />
             
             </div>
+            </Link>
       </div>
  
    
