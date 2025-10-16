@@ -1,8 +1,7 @@
 import { Request, Response } from "express";
 import fs from "fs";
 import path from "path";
-import data from "../data/episodes.json";
-
+import data from "../../public/data/podcasts.json";
 // INFO: Streams an episode's audio file with HTTP Range support (enables seeking).
 // NOTE: Route → GET /stream/:id  → serves /public/audio/:id.mp3 if present.
 // IDEA: Keep MP3 file name = episode "id" for zero-config mapping.

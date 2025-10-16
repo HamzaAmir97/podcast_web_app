@@ -1,0 +1,52 @@
+[
+  {
+    "id": "a-vida-e-boa",
+    "title": "A vida é boa",
+    "description": "Conversas leves sobre aproveitar a vida e produtividade sem estresse.",
+    "thumbnail": "/static/images/a-vida-e-boa.jpg",
+    "audioUrl": "/stream/a-vida-e-boa",
+    "durationSeconds": 5718,
+    "publishedAt": "2021-01-08T09:00:00.000Z",
+    "authors": ["Tiago", "Diego", "Pellizzetti"]
+  },
+  {
+    "id": "como-programar-like-a-god",
+    "title": "Como programar like a god",
+    "description": "Dicas práticas de código, hábitos de estudo e mindset para devs.",
+    "thumbnail": "/static/images/como-programar-like-a-god.jpg",
+    "audioUrl": "/stream/como-programar-like-a-god",
+    "durationSeconds": 2140,
+    "publishedAt": "2021-01-07T09:00:00.000Z",
+    "authors": ["Maria", "Tiago", "Samuel"]
+  },
+  {
+    "id": "bora-viver",
+    "title": "Bora viver!",
+    "description": "Histórias e reflexões sobre carreira e vida fora do trabalho.",
+    "thumbnail": "/static/images/bora-viver.jpg",
+    "audioUrl": "/stream/bora-viver",
+    "durationSeconds": 3267,
+    "publishedAt": "2021-02-12T09:00:00.000Z",
+    "authors": ["Diego", "Richard"]
+  },
+  {
+    "id": "nao-desista-de-voce",
+    "title": "Não desista de você",
+    "description": "Motivação, disciplina e como voltar aos trilhos após pausas.",
+    "thumbnail": "/static/images/nao-desista-de-voce.jpg",
+    "audioUrl": "/stream/nao-desista-de-voce",
+    "durationSeconds": 5231,
+    "publishedAt": "2021-03-24T09:00:00.000Z",
+    "authors": ["Pelpas", "Pulili", "Pepe", "Pupa"]
+  },
+  {
+    "id": "a-vida-e-incrivel",
+    "title": "A vida é incrível",
+    "description": "Momentos marcantes e aprendizados do cotidiano.",
+    "thumbnail": "/static/images/a-vida-e-incrivel.jpg",
+    "audioUrl": "/stream/a-vida-e-incrivel",
+    "durationSeconds": 5718,
+    "publishedAt": "2021-03-25T09:00:00.000Z",
+    "authors": ["B1", "B2", "descendo as escadas"]
+  }
+]
