@@ -84,7 +84,7 @@ export default function EpisodeCard({
 
         {/* title and description */}
         <div className="flex flex-col gap-2 p-2">
-          <p className="text-[#494D4B] line-clamp-2">{title}</p>
+          <p className="text-[#494D4B] ">{title}</p>
 
           <div className="flex flex-col gap-0.5">
             <p className="text-[#808080] ">{description}</p>

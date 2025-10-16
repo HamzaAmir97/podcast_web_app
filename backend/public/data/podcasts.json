@@ -2,7 +2,7 @@
   {
     "id": "a-vida-e-boa",
     "title": "A vida é boa",
-    "description": "Conversas leves sobre aproveitar a vida e produtividade sem estresse.",
+    "description": "Um papo leve sobre como aproveitar o dia a dia sem culpa e sem romantizar a produtividade tóxica. Falamos de limites saudáveis, descanso intencional, rituais de foco que cabem na rotina e pequenas escolhas que melhoram a qualidade de vida do dev. Compartilhamos histórias reais de projetos, perrengues e retomadas, além de dicas práticas para organizar a semana, dizer mais \"não\" e celebrar vitórias simples.",
     "thumbnail": "/static/images/a-vida-e-boa.jpg",
     "audioUrl": "/stream/a-vida-e-boa",
     "durationSeconds": 5718,
@@ -12,7 +12,7 @@
   {
     "id": "como-programar-like-a-god",
     "title": "Como programar like a god",
-    "description": "Dicas práticas de código, hábitos de estudo e mindset para devs.",
+    "description": "Um guia direto para quem quer evoluir de forma consistente: como estudar melhor, montar ciclos curtos de prática, escrever código mais legível e revisar sem sofrer. Discutimos mindset, ergonomia de editor, padrões que evitam bugs e formas simples de medir progresso. Tem também indicações de materiais, exercícios de projeto do zero e estratégias para não travar diante de tecnologias novas.",
     "thumbnail": "/static/images/como-programar-like-a-god.jpg",
     "audioUrl": "/stream/como-programar-like-a-god",
     "durationSeconds": 2140,
@@ -22,7 +22,7 @@
   {
     "id": "bora-viver",
     "title": "Bora viver!",
-    "description": "Histórias e reflexões sobre carreira e vida fora do trabalho.",
+    "description": "Carreira é importante, mas não é tudo. Neste episódio falamos sobre ritmo sustentável, hobbies que recarregam a criatividade e como alinhar trabalho com valores pessoais. Entramos em temas como limites com clientes, pausas conscientes, colaboração generosa e a coragem de mudar de rota. Um convite para respirar fundo e construir uma trajetória que caiba na sua vida, e não o contrário.",
     "thumbnail": "/static/images/bora-viver.jpg",
     "audioUrl": "/stream/bora-viver",
     "durationSeconds": 3267,
@@ -32,7 +32,7 @@
   {
     "id": "nao-desista-de-voce",
     "title": "Não desista de você",
-    "description": "Motivação, disciplina e como voltar aos trilhos após pausas.",
+    "description": "Todo mundo passa por fases difíceis: burnout, comparação, prazos apertados ou aquela síndrome do impostor que insiste em voltar. Conversamos sobre como pedir ajuda, recomeçar sem vergonha, ajustar expectativas e montar um plano realista de retomada. Trazemos técnicas de foco gentil, pequenos acordos diários e ferramentas simples para acompanhar evolução sem ansiedade. Um abraço em formato de episódio.",
     "thumbnail": "/static/images/nao-desista-de-voce.jpg",
     "audioUrl": "/stream/nao-desista-de-voce",
     "durationSeconds": 5231,
@@ -42,7 +42,7 @@
   {
     "id": "a-vida-e-incrivel",
     "title": "A vida é incrível",
-    "description": "Momentos marcantes e aprendizados do cotidiano.",
+    "description": "Histórias de bastidores que lembram por que começamos a programar: curiosidade, construção e comunidade. Falamos de erros que viraram risada, mentorias inesperadas, projetos que deram certo por detalhes e lições que levamos para fora do editor. O episódio reúne reflexões sobre propósito, gratidão e a alegria de aprender sempre — mesmo quando o caminho é torto.",
     "thumbnail": "/static/images/a-vida-e-incrivel.jpg",
     "audioUrl": "/stream/a-vida-e-incrivel",
     "durationSeconds": 5718,

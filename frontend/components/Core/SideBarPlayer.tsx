@@ -4,6 +4,7 @@ import React, { useEffect, useRef } from "react";
 import Image from "next/image";
 import { usePlayer } from "../../stores/usePlayer";
 import { resolveMediaUrl } from "../../utils/media";
+import clsx from "clsx";
 
 const fmt = (sec: number) => {
   const m = Math.floor(sec / 60), s = sec % 60;
@@ -41,7 +42,7 @@ const SideBarPlayer = () => {
       <audio ref={audioRef} preload="metadata" crossOrigin="anonymous" />
 
       {/* ====== mobile (info+progress + controls) ====== */}
-      <div className="h-[20rem] w-full  px-2 lg:hidden">
+      <div className="h-[20rem] w-screen  px-5 lg:hidden">
         {/* info + progress */}
         <div className="pt-2">
           <div className="flex items-center gap-2">
@@ -85,7 +86,7 @@ const SideBarPlayer = () => {
         </div>
 
         {/* controls row (unchanged) */}
-        <div className="h-[56px] p-2 w-full flex items-center justify-center gap-5">
+        <div className="h-[56px] p-10 w-full flex items-center justify-center gap-5">
           {/* shuffle */}
           <Image
             src="/icons/shuffle.png"
@@ -234,8 +235,8 @@ const SideBarPlayer = () => {
             />
             {/* play/pause */}
             <button
-              className={`w-16 h-16 rounded-2xl bg-[#9164FA] hover:bg-[#6F48C9] flex items-center justify-center
-                          ${disabled ? "opacity-40 cursor-not-allowed pointer-events-none" : ""}`}
+              className={clsx(`w-16 h-16 rounded-2xl  hover:bg-[#6F48C9] ${isPlaying ? "bg-[#6F48C9]" : "bg-[#9164FA]"} flex items-center justify-center
+                          ${disabled ? "opacity-40 cursor-not-allowed pointer-events-none" : ""}`)}
               aria-label="play"
               onClick={() => !disabled && toggle()}
               disabled={disabled}
