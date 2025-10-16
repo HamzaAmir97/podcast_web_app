@@ -1,12 +1,15 @@
+
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 
 const page = ({ params }: { params: { id: string } }) => {
   return (
-    <div className="w-full h-screen flex  flex-col gap-2  items-center  p-8  ">
+    <div className="w-[31rem] md:w-[62rem] lg:w-[42rem] xl:w-[68rem]   h-screen flex  flex-col items-center  p-10 gap-2  mb-10  ">
+    
       {/* podcast header */}
-      <div className="relative">
+     
+      <div className="relative w-[400px] md:w-[500px] lg:w-[600px] xl:w-[656px] h-[160px]">
         <Image
           src="/images/image (2).png"
           alt="Logo"
@@ -50,7 +53,7 @@ const page = ({ params }: { params: { id: string } }) => {
    
       {/* podcast content */}
 
-      <div className="w-[642px] h-[379px] flex flex-col gap-5">
+      <div className="w-[400px]  md:w-[500px] lg:w-[600px] xl:w-[656px] h-[379px] flex flex-col  gap-5">
         <h1 className="text-[32px] text-[#494D4B] font-bold">
           Como começar na programação em <br /> 2021 do jeito certo
         </h1>
@@ -79,5 +82,7 @@ A gente passa a maior parte do tempo escrevendo código. Agora chegou o momento 
     </div>
   );
 };
+ 
+export default page; 
 
-export default page;
+

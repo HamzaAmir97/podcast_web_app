@@ -2,7 +2,7 @@ import Image from 'next/image'
 import React from 'react'
 import PlayIcon from './playIcon'
 
-const EpisodeCard = ({title ="O que é um bom código?"
+const  EpisodeCard = ({title ="O que é um bom código?"
     ,description ="Diego e Richard",
     date ="12 de outubro de 2025",
     imgURL ="/Images/image (4).png" 
@@ -42,7 +42,7 @@ height={96}
 
    
 
-       <div className='absolute top-[70px] left-[380px]'>
+       <div className='absolute top-15 right-5'>
       <PlayIcon/>
        </div>
     </div>
