@@ -4,6 +4,8 @@ import EpisodeCard from "@/components/home/EpisodeCard";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { API_PATHS } from "@/lib/apiPaths";
 import { resolveMediaUrl } from "@/utils/media";
+import Link from "next/link";
+import PlayButton from "@/components/player/PlayButton";
 
 // --- API shape coming from backend/static JSON ---
 type EpisodeAPI = {
@@ -64,6 +66,7 @@ export default async function HomePage() {
             <div className="flex flex-col xl:flex-row gap-6">
               {first && (
                 <EpisodeCard
+                  url={"/" + first.id}
                   title={first.title}
                   description={first.authors.join(", ")}
                   date={new Date(first.publishedAt).toLocaleDateString("pt-BR", {
@@ -77,6 +80,7 @@ export default async function HomePage() {
 
               {secondCard && (
                 <EpisodeCard
+                  url={"/" + secondCard.id}
                   title={secondCard.title}
                   description={secondCard.authors.join(", ")}
                   date={`${formatDateLabel(secondCard.publishedAt)} - ${formatDuration(secondCard.durationSeconds)}`}
@@ -103,10 +107,15 @@ export default async function HomePage() {
 
                 <TableBody>
                   {episodes.map((ep) => (
-                    <TableRow key={ep.id} className="hover:bg-[#F8F8FA] cursor-pointer hover:opacity-75">
                     
+                    <TableRow key={ep.id} className="hover:bg-[#F8F8FA] cursor-pointer hover:opacity-75"
+                    
+                    
+                    >
+                     
                       <TableCell>
                         <div className="flex items-center gap-3">
+                          <Link href={"/" + ep.id} className="flex items-center gap-3 ">
                           <Image
                             src={resolveMediaUrl(ep.thumbnail)}
                             alt={ep.title}
@@ -115,37 +124,28 @@ export default async function HomePage() {
                             className="rounded-md object-cover"
                           />
                           <p className="font-bold text-[#494D4B] line-clamp-1">{ep.title}</p>
+                          </Link>
                         </div>
                       </TableCell>
 
                       <TableCell className="text-[#AFB2B1]">
-                        <span className="line-clamp-1">{ep.authors.join(", ")}</span>
+                        <Link href={"/" + ep.id} className="line-clamp-1">{ep.authors.join(", ")}</Link>
                       </TableCell>
 
                       <TableCell className="text-[#AFB2B1]">
-                        {formatDateLabel(ep.publishedAt)}
+                        <Link href={"/" + ep.id} className="line-clamp-1">{formatDateLabel(ep.publishedAt)}</Link>
                       </TableCell>
 
                       <TableCell>
-                        <div className="flex items-center justify-end gap-3 pr-1">
+                        <div className="flex items-center justify-between gap-3 pr-1">
                           <span className="text-[#AFB2B1] tabular-nums">
                             {formatDuration(ep.durationSeconds)}
                           </span>
 
-                          {/* play icon (wire this to your PlayerContext) */}
-                          <button
-                            aria-label={`Play ${ep.title}`}
-                            className="w-8 h-8 rounded-[10px] border border-[#E6E8EB] flex items-center justify-center hover:bg-[#F2F3F5] transition"
-                            // onClick={() => player.playById(ep.id)} // example
-                          >
-                            <Image
-                              src="/icons/play__green_arrow.svg"
-                              alt="play"
-                              width={16}
-                              height={16}
-                              className="pointer-events-none "
-                            />
-                          </button>
+                         <PlayButton
+  episode={ep} // نفس الشكل اللي عندك EpisodeAPI — الحقول متطابقة
+  className="w-8 h-8 rounded-[10px] border border-[#E6E8EB] flex items-center justify-center hover:bg-[#F2F3F5] transition"
+/>
                         </div>
                       </TableCell>
                     </TableRow>
