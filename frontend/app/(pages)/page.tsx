@@ -5,6 +5,7 @@ import { API_PATHS } from "@/lib/apiPaths";
 import { resolveMediaUrl } from "@/utils/media";
 import Link from "next/link";
 import PlayButton from "@/components/player/PlayButton";
+import PlayerQueueHydrator from "@/components/PlayerQueueHydrator";
 
 // (اختياري) لو بتستخدم Edge وفيه أكواد Node، ثبّت على nodejs
 export const runtime = "nodejs";
@@ -97,6 +98,9 @@ export default async function HomePage() {
 
   return (
     <main className="w-[31rem] md:w-[62rem] lg:w-[42rem] xl:w-[68rem] bg-white lg:pb-0">
+     <PlayerQueueHydrator episodes={episodes} />
+
+    
       <div className="mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-15">
         <div className="container mx-auto px-4 py-8 flex flex-col gap-10">
           {/* ===== Header / Latest releases ===== */}
