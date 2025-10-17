@@ -22,6 +22,7 @@ const SideBarPlayer = () => {
 
   useEffect(() => {
     if (audioRef.current) setAudio(audioRef.current);
+    console.log(audioRef.current);
   }, [setAudio]);
 
   const disabled = !current;
@@ -39,7 +40,7 @@ const SideBarPlayer = () => {
       `}
     >
       {/* global audio */}
-      <audio ref={audioRef} preload="metadata" crossOrigin="anonymous" />
+     <audio ref={audioRef} preload="metadata" />
 
       {/* ====== mobile (info+progress + controls) ====== */}
       <div className="h-[20rem] w-screen  px-5 lg:hidden">

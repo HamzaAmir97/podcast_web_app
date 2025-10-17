@@ -7,6 +7,9 @@ const nextConfig: NextConfig = {
       // أضف دومين الإنتاج لاحقًا
     ],
   },
+    async rewrites() {
+    return [{ source: "/stream/:id", destination: "http://localhost:5000/stream/:id" }];
+  },
 };
 
 export default nextConfig;

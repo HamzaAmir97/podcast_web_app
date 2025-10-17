@@ -14,7 +14,13 @@ import { errorHandler } from "./middlewares/errorHandler";
 export const createApp = () => {
   const app = express();
 
-  app.use(helmet());
+ app.use(
+  helmet({
+    crossOriginResourcePolicy: { policy: "cross-origin" },
+    crossOriginEmbedderPolicy: false,
+  })
+);
+
   app.use(cors({ origin: process.env.CORS_ORIGIN?.split(",") || "*" }));
   app.use(morgan("dev"));
   app.use(express.json());
