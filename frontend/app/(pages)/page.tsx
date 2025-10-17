@@ -63,6 +63,7 @@ async function fetchEpisodes(): Promise<EpisodeAPI[]> {
 
     const raw: unknown = await res.json();
 
+    // طبّع أي شكل شائع: [], {episodes:[]}, {items:[]}, {data:[]}
     if (isEpisodeArray(raw)) {
       return [...raw].sort((a, b) => publishedTime(b) - publishedTime(a));
     }
@@ -89,6 +90,7 @@ async function fetchEpisodes(): Promise<EpisodeAPI[]> {
 export default async function HomePage() {
   const episodes = await fetchEpisodes();
 
+  // Pick latest two for the top cards (fallbacks if less than 2)
   const [first, secondCard] = episodes;
 
   return (
