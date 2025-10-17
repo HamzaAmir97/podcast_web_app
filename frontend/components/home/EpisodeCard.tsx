@@ -74,7 +74,7 @@ export default function EpisodeCard({
         {/* image */}
         <div>
           <Image
-            src={resolveMediaUrl(imgURL)}
+            src={imgURL}
             alt={title}
             width={96}
             height={96}
