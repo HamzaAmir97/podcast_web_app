@@ -9,13 +9,13 @@ import { resolveMediaUrl } from "@/utils/media";
 
 type Props = {
   title: string;
-  description: string;         // أسماء المؤلفين كنص (بنحو "A, B, C")
-  date: string;                // لعرض البطاقة فقط
+  description: string;         
+  date: string;                
   imgURL: string;
-  url: string;                 // رابط التفاصيل: مثل "/a-vida-e-boa"
-  audioUrl?: string;           // (يفضّل تمريره) مثل "/stream/a-vida-e-boa"
-  publishedAtISO?: string;     // (اختياري) لو متاح عندك
-  durationSeconds?: number;    // (اختياري) لو متاح عندك
+  url: string;                 
+  audioUrl?: string;           
+  publishedAtISO?: string;     
+  durationSeconds?: number;     
 };
 
 export default function EpisodeCard({
@@ -24,29 +24,29 @@ export default function EpisodeCard({
   date = "12 de outubro de 2025",
   imgURL = "/Images/image (4).png",
   url = "",
-  audioUrl,             // لو ما وصل، نولّده من الـid
-  publishedAtISO,       // اختياري
-  durationSeconds = 0,  // اختياري
+  audioUrl,           
+  publishedAtISO,       
+  durationSeconds = 0,  
 }: Props) {
   const loadAndPlay = usePlayer((s) => s.loadAndPlay);
 
-  // استخرج الـid من الـurl ("/algo" → "algo")
+ 
   const id = url?.replace(/^\/+/, "") || title.toLowerCase().replace(/\s+/g, "-");
 
-  // لو ما أرسلت audioUrl، نحاول نبنيه بالـid
+
   const safeAudioUrl = audioUrl ?? `/stream/${id}`;
 
-  // authors: حوّل description لقائمة بسيطة
+ 
   const authors = description
     ? description.split(",").map((s) => s.trim()).filter(Boolean)
     : [];
 
-  // ابنِ Episode للستور (عشان البلاير يعرض العنوان/الصورة والمؤلفين)
+
   const episodeForPlayer: Episode = {
     id,
     title,
     description,
-    thumbnail: resolveMediaUrl(imgURL),   // نحلّ المسار لو كان /static...
+    thumbnail: resolveMediaUrl(imgURL),  
     audioUrl: safeAudioUrl,
     durationSeconds,
     publishedAt: publishedAtISO || new Date().toISOString(),
@@ -69,7 +69,6 @@ export default function EpisodeCard({
         hover:bg-[#F8F8FA] transition
       "
     >
-      {/* الصورة + النص → ينتقلوا للتفاصيل */}
       <Link href={url} className="flex gap-2 no-underline">
         {/* image */}
         <div>
@@ -87,13 +86,13 @@ export default function EpisodeCard({
           <p className="text-[#494D4B] ">{title}</p>
 
           <div className="flex flex-col gap-0.5">
-            <p className="text-[#808080] ">{description}</p>
-            <p className="text-[#808080] ">{date}</p>
+            <p className="text-[#808080] font-inter ">{description}</p>
+            <p className="text-[#808080] font-inter ">{date}</p>
           </div>
         </div>
       </Link>
 
-      {/* زر التشغيل: يشغّل في البلاير بدون تنقّل */}
+     
       <button
         type="button"
         aria-label={`Play ${title}`}

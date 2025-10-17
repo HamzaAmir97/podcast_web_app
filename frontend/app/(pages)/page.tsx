@@ -163,26 +163,26 @@ export default async function HomePage() {
                               height={40}
                               className="rounded-md object-cover"
                             />
-                            <p className="font-bold text-[#494D4B] line-clamp-1">{ep.title}</p>
+                            <p className="font-bold text-[#494D4B] line-clamp-1 font-inter">{ep.title}</p>
                           </Link>
                         </div>
                       </TableCell>
 
                       <TableCell className="text-[#AFB2B1]">
-                        <Link href={"/" + ep.id} className="line-clamp-1">
+                        <Link href={"/" + ep.id} className="line-clamp-1 font-inter">
                           {ep.authors.join(", ")}
                         </Link>
                       </TableCell>
 
                       <TableCell className="text-[#AFB2B1]">
-                        <Link href={"/" + ep.id} className="line-clamp-1">
+                        <Link href={"/" + ep.id} className="line-clamp-1 font-inter">
                           {formatDateLabel(ep.publishedAt)}
                         </Link>
                       </TableCell>
 
                       <TableCell>
                         <div className="flex items-center justify-between gap-3 pr-1">
-                          <span className="text-[#AFB2B1] tabular-nums">
+                          <span className="text-[#AFB2B1] tabular-nums font-inter">
                             {formatDuration(ep.durationSeconds)}
                           </span>
 

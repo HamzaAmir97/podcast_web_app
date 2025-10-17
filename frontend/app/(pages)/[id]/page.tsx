@@ -75,11 +75,11 @@ export default async function Page({ params }: { params: { id: string } }) {
         <h1 className="text-[32px] text-[#494D4B] font-bold">{episode.title}</h1>
 
         <div className="flex gap-5 items-center">
-          <p className="text-[#808080]">{episode.authors.join(", ")}</p>
+          <p className="text-[#808080] font-inter">{episode.authors.join(", ")}</p>
           <span className="w-[4px] h-[4px] rounded-full bg-[#DDDDDD]" />
-          <p className="text-[#808080]">{fmtDate(episode.publishedAt)}</p>
+          <p className="text-[#808080] font-inter">{fmtDate(episode.publishedAt)}</p>
           <span className="w-[4px] h-[4px] rounded-full bg-[#DDDDDD]" />
-          <p className="text-[#808080]">{fmtDur(episode.durationSeconds)}</p>
+          <p className="text-[#808080] font-inter">{fmtDur(episode.durationSeconds)}</p>
         </div>
 
         {/* separator */}
