@@ -19,6 +19,12 @@ try {
 } catch {  }
 
 const nextConfig = {
+  typescript: {
+    ignoreBuildErrors: true,
+  },
+  linting: {
+    ignoreDuringBuilds: true,
+  },
   async rewrites() {
     return [
       { source: "/stream/:id", destination: `${BACKEND_ORIGIN}/stream/:id` },

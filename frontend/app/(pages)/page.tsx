@@ -6,11 +6,11 @@ import { resolveMediaUrl } from "@/utils/media";
 import Link from "next/link";
 import PlayButton from "@/components/player/PlayButton";
 
-// (اختياري) لو كنت على Edge وبتستخدم أكواد Node، خليك على NodeJS
+// (اختياري) لو بتستخدم Edge وفيه أكواد Node، ثبّت على nodejs
 export const runtime = "nodejs";
 
 // --- API shape coming from backend/static JSON ---
-type EpisodeAPI = {
+export type EpisodeAPI = {
   id: string;
   title: string;
   description: string;
@@ -20,6 +20,11 @@ type EpisodeAPI = {
   publishedAt: string;
   authors: string[];
 };
+
+// --- Type guards ---
+function isEpisodeArray(x: unknown): x is EpisodeAPI[] {
+  return Array.isArray(x) && x.every((e) => e && typeof (e as EpisodeAPI).id === "string");
+}
 
 // --- UI helpers ---
 function formatDuration(total: number) {
@@ -39,38 +44,42 @@ function formatDateLabel(iso: string) {
   return `${day} ${monthShort} ${year}`;
 }
 
-/** اجلب الحلقات مع “تطبيع” شكل الاستجابة لمنع data.sort is not a function */
+function publishedTime(e: EpisodeAPI): number {
+  const t = new Date(e.publishedAt ?? "").getTime();
+  return Number.isFinite(t) ? t : 0;
+}
+
+
 async function fetchEpisodes(): Promise<EpisodeAPI[]> {
   try {
     const url = API_PATHS.EPISODES.GET_ALL as string;
     const res = await fetch(url, { cache: "no-store", next: { revalidate: 0 } });
 
     if (!res.ok) {
-      // لا نرمي خطأ كي لا نكسر SSR؛ نعرض لوج ونرجع مصفوفة فاضية
+ 
       console.error("[episodes] fetch failed:", res.status, res.statusText, url);
       return [];
     }
 
-    const raw = await res.json();
+    const raw: unknown = await res.json();
 
-    // طبّع أي شكل شائع: [], {episodes:[]}, {items:[]}, {data:[]}
-    const list: unknown =
-      Array.isArray(raw) ? raw
-      : Array.isArray((raw as any)?.episodes) ? (raw as any).episodes
-      : Array.isArray((raw as any)?.items) ? (raw as any).items
-      : Array.isArray((raw as any)?.data) ? (raw as any).data
-      : [];
-
-    if (!Array.isArray(list)) {
-      console.error("[episodes] unexpected payload shape:", raw);
-      return [];
+    if (isEpisodeArray(raw)) {
+      return [...raw].sort((a, b) => publishedTime(b) - publishedTime(a));
     }
 
-    // Ensure newest first (guards for missing dates)
-    return [...list].sort(
-      (a: any, b: any) =>
-        +new Date(b?.publishedAt ?? 0) - +new Date(a?.publishedAt ?? 0)
-    );
+    if (raw && typeof raw === "object") {
+      const obj = raw as Record<string, unknown>;
+      const keys = ["episodes", "items", "data"] as const;
+      for (const k of keys) {
+        const v = obj[k];
+        if (isEpisodeArray(v)) {
+          return [...v].sort((a, b) => publishedTime(b) - publishedTime(a));
+        }
+      }
+    }
+
+    console.error("[episodes] unexpected payload shape:", raw);
+    return [];
   } catch (e) {
     console.error("[episodes] fetch error:", e);
     return [];
@@ -80,7 +89,6 @@ async function fetchEpisodes(): Promise<EpisodeAPI[]> {
 export default async function HomePage() {
   const episodes = await fetchEpisodes();
 
-  // Pick latest two for the top cards (fallbacks if less than 2)
   const [first, secondCard] = episodes;
 
   return (
@@ -111,7 +119,9 @@ export default async function HomePage() {
                   url={"/" + secondCard.id}
                   title={secondCard.title}
                   description={secondCard.authors.join(", ")}
-                  date={`${formatDateLabel(secondCard.publishedAt)} - ${formatDuration(secondCard.durationSeconds)}`}
+                  date={`${formatDateLabel(secondCard.publishedAt)} - ${formatDuration(
+                    secondCard.durationSeconds
+                  )}`}
                   imgURL={resolveMediaUrl(secondCard.thumbnail)}
                 />
               )}
