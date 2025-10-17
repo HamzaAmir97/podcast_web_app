@@ -1,20 +1,26 @@
 {
   "name": "backend",
   "version": "1.0.0",
-  "main": "dist/server.js",
-  "type": "commonjs",
+  "main": "src/server.ts",
   "scripts": {
     "build": "tsc -p tsconfig.json",
     "start": "node dist/server.js",
-    "dev": "ts-node-dev --respawn --transpile-only src/server.ts",
+    "dev": "ts-node-dev --respawn --transpile-only --exit-child src/server.ts",
+    "clean": "rimraf dist",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
   "dependencies": {
     "cors": "^2.8.5",
+    "dotenv": "^17.2.3",
     "express": "^5.1.0",
     "express-rate-limit": "^8.1.0",
     "helmet": "^8.1.0",
-    "morgan": "^1.10.1"
+    "morgan": "^1.10.1",
+    "nodemon": "^3.1.10"
   },
   "devDependencies": {
     "@types/cors": "^2.8.19",
