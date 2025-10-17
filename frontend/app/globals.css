@@ -4,7 +4,7 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
-  --font-sans: var(--font-lexend);
+ 
   --color-primary: rgba(130, 87, 229, 1);
   --color-secondary: rgba(4, 211, 97, 1);
   --color-background: var(--background);
@@ -52,7 +52,7 @@
 }
 
 :root {
-  --font-sans: var(--font-lexend);
+ 
   --radius: 0.625rem;
   --background: oklch(1 0 0);
   --foreground: oklch(0.145 0 0);

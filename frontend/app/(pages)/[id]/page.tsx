@@ -85,7 +85,7 @@ export default async function Page({ params }: { params: { id: string } }) {
         {/* separator */}
         <span className="w-[623px] h-[0px] rounded-full border-[1px] border-[#E6E8EB]" />
 
-        <article className="text-[16px] text-[#494D4B]">{episode.description}</article>
+        <article className="text-[16px] text-[#494D4B] font-inter">{episode.description}</article>
       </div>
     </div>
   );
