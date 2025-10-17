@@ -3,7 +3,7 @@ import Image from "next/image";
 
 const AppHeader = () => {
   return (
-    <header className="sticky top-0 z-50 bg-white border-b px-8 border-[#E6E8EB]">
+    <header className="sticky w-[1092px] top-0 z-50 bg-white border-b px-8 border-[#E6E8EB]">
       <div className="container mx-auto h-24 px-8 flex items-center justify-between">
         {/* logo + tagline */}
         <div className="flex items-center gap-5">
