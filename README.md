@@ -1,5 +1,18 @@
 # Podcast Web App
 
+<p align="center">
+  <img src="./screenshots/podcaster (1).png" alt="Home – idle player" width="900" />
+</p>
+<p align="center">
+  <img src="./screenshots/podcaster (2).png" alt="Home – playing" width="900" />
+</p>
+<p align="center">
+  <img src="./screenshots/podcaster (3).png" alt="Episode detail" width="900" />
+</p>
+<p align="center">
+  <img src="./screenshots/podcaster (4).png" alt="Mobile player" width="360" />
+</p>
+
 ![Next.js](https://img.shields.io/badge/Next.js-15-black?logo=nextdotjs)
 ![React](https://img.shields.io/badge/React-18-20232a?logo=react)
 ![TypeScript](https://img.shields.io/badge/TypeScript-5-3178C6?logo=typescript)
