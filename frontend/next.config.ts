@@ -1,14 +1,32 @@
-import type { NextConfig } from "next";
+// frontend/next.config.js
+const BACKEND_ORIGIN = process.env.BACKEND_ORIGIN || "http://localhost:5000";
 
-const nextConfig: NextConfig = {
-  images: {
-    remotePatterns: [
-      { protocol: "http", hostname: "localhost", port: "5000", pathname: "/static/**" },
-      // أضف دومين الإنتاج لاحقًا
-    ],
+let remotePatterns = [
+  // للتطوير المحلي
+  { protocol: "http", hostname: "localhost", port: "5000", pathname: "/static/**" },
+];
+
+
+try {
+  const u = new URL(BACKEND_ORIGIN);
+  
+  remotePatterns.push({
+    protocol: u.protocol.replace(":", ""), // "https" أو "http"
+    hostname: u.hostname,                  // "podcast-web-app.onrender.com"
+    port: u.port,
+    pathname: "/static/**",
+  });
+} catch {  }
+
+const nextConfig = {
+  async rewrites() {
+    return [
+      { source: "/stream/:id", destination: `${BACKEND_ORIGIN}/stream/:id` },
+    ];
   },
-    async rewrites() {
-    return [{ source: "/stream/:id", destination: "http://localhost:5000/stream/:id" }];
+  images: {
+    remotePatterns,
+   
   },
 };
 

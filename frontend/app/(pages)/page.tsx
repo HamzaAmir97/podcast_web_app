@@ -1,4 +1,3 @@
-
 import Image from "next/image";
 import EpisodeCard from "@/components/home/EpisodeCard";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
@@ -7,16 +6,19 @@ import { resolveMediaUrl } from "@/utils/media";
 import Link from "next/link";
 import PlayButton from "@/components/player/PlayButton";
 
+// (اختياري) لو كنت على Edge وبتستخدم أكواد Node، خليك على NodeJS
+export const runtime = "nodejs";
+
 // --- API shape coming from backend/static JSON ---
 type EpisodeAPI = {
   id: string;
   title: string;
   description: string;
-  thumbnail: string;        
-  audioUrl: string;         
-  durationSeconds: number;  
-  publishedAt: string;      
-  authors: string[];      
+  thumbnail: string;
+  audioUrl: string;
+  durationSeconds: number;
+  publishedAt: string;
+  authors: string[];
 };
 
 // --- UI helpers ---
@@ -24,41 +26,67 @@ function formatDuration(total: number) {
   const h = Math.floor(total / 3600);
   const m = Math.floor((total % 3600) / 60);
   const s = total % 60;
-  return h > 0 ? `${h}:${String(m).padStart(2,"0")}:${String(s).padStart(2,"0")}` : `${m}:${String(s).padStart(2,"0")}`;
+  return h > 0
+    ? `${h}:${String(m).padStart(2, "0")}:${String(s).padStart(2, "0")}`
+    : `${m}:${String(s).padStart(2, "0")}`;
 }
 
-
-
 function formatDateLabel(iso: string) {
-  // Example output: "8 Jan 21" to match your table style
   const d = new Date(iso);
   const day = d.getUTCDate();
   const year = String(d.getUTCFullYear()).slice(-2);
-  const monthShort = d.toLocaleString("en-US", { month: "short", timeZone: "UTC" }); // Jan/Feb/Mar...
+  const monthShort = d.toLocaleString("en-US", { month: "short", timeZone: "UTC" });
   return `${day} ${monthShort} ${year}`;
 }
 
+/** اجلب الحلقات مع “تطبيع” شكل الاستجابة لمنع data.sort is not a function */
 async function fetchEpisodes(): Promise<EpisodeAPI[]> {
-  const res = await fetch(API_PATHS.EPISODES.GET_ALL, { cache: "no-store" });
-  if (!res.ok) throw new Error("Failed to load episodes");
-  const data = (await res.json()) as EpisodeAPI[];
+  try {
+    const url = API_PATHS.EPISODES.GET_ALL as string;
+    const res = await fetch(url, { cache: "no-store", next: { revalidate: 0 } });
 
-  // Ensure newest first (if backend doesn’t already sort)
-  return data.sort((a, b) => +new Date(b.publishedAt) - +new Date(a.publishedAt));
+    if (!res.ok) {
+      // لا نرمي خطأ كي لا نكسر SSR؛ نعرض لوج ونرجع مصفوفة فاضية
+      console.error("[episodes] fetch failed:", res.status, res.statusText, url);
+      return [];
+    }
+
+    const raw = await res.json();
+
+    // طبّع أي شكل شائع: [], {episodes:[]}, {items:[]}, {data:[]}
+    const list: unknown =
+      Array.isArray(raw) ? raw
+      : Array.isArray((raw as any)?.episodes) ? (raw as any).episodes
+      : Array.isArray((raw as any)?.items) ? (raw as any).items
+      : Array.isArray((raw as any)?.data) ? (raw as any).data
+      : [];
+
+    if (!Array.isArray(list)) {
+      console.error("[episodes] unexpected payload shape:", raw);
+      return [];
+    }
+
+    // Ensure newest first (guards for missing dates)
+    return [...list].sort(
+      (a: any, b: any) =>
+        +new Date(b?.publishedAt ?? 0) - +new Date(a?.publishedAt ?? 0)
+    );
+  } catch (e) {
+    console.error("[episodes] fetch error:", e);
+    return [];
+  }
 }
 
 export default async function HomePage() {
   const episodes = await fetchEpisodes();
 
   // Pick latest two for the top cards (fallbacks if less than 2)
-  const [first, second] = episodes;
-  const secondCard = episodes[1];
+  const [first, secondCard] = episodes;
 
   return (
     <main className="w-[31rem] md:w-[62rem] lg:w-[42rem] xl:w-[68rem] bg-white lg:pb-0">
       <div className="mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-15">
         <div className="container mx-auto px-4 py-8 flex flex-col gap-10">
-
           {/* ===== Header / Latest releases ===== */}
           <section className="flex flex-col gap-6">
             <h1 className="text-3xl font-bold text-[#494D4B]">Ultimos lançamentos</h1>
@@ -107,33 +135,35 @@ export default async function HomePage() {
 
                 <TableBody>
                   {episodes.map((ep) => (
-                    
-                    <TableRow key={ep.id} className="hover:bg-[#F8F8FA] cursor-pointer hover:opacity-75"
-                    
-                    
+                    <TableRow
+                      key={ep.id}
+                      className="hover:bg-[#F8F8FA] cursor-pointer hover:opacity-75"
                     >
-                     
                       <TableCell>
                         <div className="flex items-center gap-3">
                           <Link href={"/" + ep.id} className="flex items-center gap-3 ">
-                          <Image
-                            src={resolveMediaUrl(ep.thumbnail)}
-                            alt={ep.title}
-                            width={40}
-                            height={40}
-                            className="rounded-md object-cover"
-                          />
-                          <p className="font-bold text-[#494D4B] line-clamp-1">{ep.title}</p>
+                            <Image
+                              src={resolveMediaUrl(ep.thumbnail)}
+                              alt={ep.title}
+                              width={40}
+                              height={40}
+                              className="rounded-md object-cover"
+                            />
+                            <p className="font-bold text-[#494D4B] line-clamp-1">{ep.title}</p>
                           </Link>
                         </div>
                       </TableCell>
 
                       <TableCell className="text-[#AFB2B1]">
-                        <Link href={"/" + ep.id} className="line-clamp-1">{ep.authors.join(", ")}</Link>
+                        <Link href={"/" + ep.id} className="line-clamp-1">
+                          {ep.authors.join(", ")}
+                        </Link>
                       </TableCell>
 
                       <TableCell className="text-[#AFB2B1]">
-                        <Link href={"/" + ep.id} className="line-clamp-1">{formatDateLabel(ep.publishedAt)}</Link>
+                        <Link href={"/" + ep.id} className="line-clamp-1">
+                          {formatDateLabel(ep.publishedAt)}
+                        </Link>
                       </TableCell>
 
                       <TableCell>
@@ -142,10 +172,10 @@ export default async function HomePage() {
                             {formatDuration(ep.durationSeconds)}
                           </span>
 
-                         <PlayButton
-  episode={ep} // نفس الشكل اللي عندك EpisodeAPI — الحقول متطابقة
-  className="w-8 h-8 rounded-[10px] border border-[#E6E8EB] flex items-center justify-center hover:bg-[#F2F3F5] transition"
-/>
+                          <PlayButton
+                            episode={ep}
+                            className="w-8 h-8 rounded-[10px] border border-[#E6E8EB] flex items-center justify-center hover:bg-[#F2F3F5] transition"
+                          />
                         </div>
                       </TableCell>
                     </TableRow>
@@ -154,7 +184,6 @@ export default async function HomePage() {
               </Table>
             </div>
           </section>
-
         </div>
       </div>
     </main>
