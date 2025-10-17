@@ -55,6 +55,8 @@ async function fetchEpisodes(): Promise<EpisodeAPI[]> {
     const url = API_PATHS.EPISODES.GET_ALL as string;
     const res = await fetch(url, { cache: "no-store", next: { revalidate: 0 } });
 
+
+    console.log("[episodes] fetch success:", res.status, res.statusText, url);
     if (!res.ok) {
  
       console.error("[episodes] fetch failed:", res.status, res.statusText, url);
